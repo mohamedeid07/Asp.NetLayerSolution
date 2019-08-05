@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularMVC", "AngularMVC\AngularMVC.csproj", "{2B32B7C4-482E-4806-9821-6F915D3E937C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoLayer", "RepoLayer\RepoLayer.csproj", "{276A02E1-5E56-47F5-8C82-971A9253D43C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{97A27347-7057-42A6-A85D-4C0BCC702243}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B32B7C4-482E-4806-9821-6F915D3E937C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B32B7C4-482E-4806-9821-6F915D3E937C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B32B7C4-482E-4806-9821-6F915D3E937C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B32B7C4-482E-4806-9821-6F915D3E937C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{276A02E1-5E56-47F5-8C82-971A9253D43C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{276A02E1-5E56-47F5-8C82-971A9253D43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{276A02E1-5E56-47F5-8C82-971A9253D43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{276A02E1-5E56-47F5-8C82-971A9253D43C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97A27347-7057-42A6-A85D-4C0BCC702243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97A27347-7057-42A6-A85D-4C0BCC702243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97A27347-7057-42A6-A85D-4C0BCC702243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97A27347-7057-42A6-A85D-4C0BCC702243}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

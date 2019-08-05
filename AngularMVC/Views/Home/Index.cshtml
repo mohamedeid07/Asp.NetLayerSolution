@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AngularMVC.Models.ProductModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Products</h2>
+
+<a href="/Home/Create">Create Product</a>
+
+
+<div ng-app="myApp">
+    <div ng-controller="MainCtrl">
+        <div class="container">
+            <h1>Hello! ng-table in the house (☞ຈل͜ຈ)☞</h1>
+            <input type="search" ng-model="searchfield" placeholder="Search for products"/>
+            <table ng-table="myTable" class="table" show-filter="false">
+
+                <tr ng-repeat="product in $data | filter: searchfield">
+                    <td title="'Name'" filter="{ Name: 'text'}" sortable="'Name'">
+                        {{product.Name}}
+                    </td>
+                    <td title="'Number Of Days'" filter="{ NumberOfDays: 'number'}" sortable="'NumberOfDays'">
+                        {{product.NumberOfDays}}
+                    </td>
+                    <td title="'Edit'">
+                        <a href="/Home/Edit?id={{product.ID}}">Edit</a>
+                    </td>
+                    <td title="'Delete'">
+                        <a href="/Home/Delete?id={{product.ID}}">Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/App.js"></script>
