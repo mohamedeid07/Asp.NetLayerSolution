@@ -4,34 +4,122 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Products</h2>
+<div class="modal fade" id="add-cat">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">إضافة منتج جديد</h4>
+            </div>
+            <div class="modal-body">
 
-<a href="/Home/Create">Create Product</a>
+                <form role="form" novalidate>
 
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label class="control-label col-md-2">الإسم</label>
+                            <div class="col-md-10" ng-class="{ 'has-error' : product.name.$invalid && !product.name.$pristine }">
+                                <input type="text" ng-model="name" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label class="control-label col-md-2">عدد الايام</label>
+                            <div class="col-md-10">
+                                <input type="number" ng-model="number" class="form-control" required />
+                                
+                            </div>
+                        </div>
+                    </div>
 
-<div ng-app="myApp">
-    <div ng-controller="MainCtrl">
-        <div class="container">
-            <h1>Hello! ng-table in the house (☞ຈل͜ຈ)☞</h1>
-            <input type="search" ng-model="searchfield" placeholder="Search for products"/>
-            <table ng-table="myTable" class="table" show-filter="false">
-
-                <tr ng-repeat="product in $data | filter: searchfield">
-                    <td title="'Name'" filter="{ Name: 'text'}" sortable="'Name'">
-                        {{product.Name}}
-                    </td>
-                    <td title="'Number Of Days'" filter="{ NumberOfDays: 'number'}" sortable="'NumberOfDays'">
-                        {{product.NumberOfDays}}
-                    </td>
-                    <td title="'Edit'">
-                        <a href="/Home/Edit?id={{product.ID}}">Edit</a>
-                    </td>
-                    <td title="'Delete'">
-                        <a href="/Home/Delete?id={{product.ID}}">Delete</a>
-                    </td>
-                </tr>
-            </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">غلق</button>
+                
+                <button type="button" ng-click="submitForm()" class="btn btn-primary">حفظ</button>
+            </div>
         </div>
     </div>
 </div>
-<script src="~/Scripts/App.js"></script>
+
+<div class="container">
+    <div class="row" >
+        <h2 class="text-center margin-btm20 solid-color">المنتجات</h2>
+    </div>
+
+    <div class="row">
+        <form role="form">
+            <div class="col-md-12">
+                <div class="well margin-btm20">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label class="control-label col-md-1">إسم المنتج</label>
+                            <div class=" col-md-11">
+                                <input ng-model="searchfield" type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row text-center">
+                        <button class="btn btn-primary">بحث</button>
+                        <button class="btn btn-default">عرض الكل</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <a href="" class="btn btn-default pull-left" data-toggle="modal" data-target="#add-cat">
+                <i class="fa fa-plus-square"></i>
+                إضافة منتج
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <table ng-table="myTable" class="table" show-filter="false">
+
+                    <tr ng-repeat="product in $data | filter: searchfield">
+                        <td title="'اسم المنتج'" filter="{ Name: 'text'}" sortable="'Name'">
+                            {{product.Name}}
+                        </td>
+                        <td title="'عدد الايام'" filter="{ NumberOfDays: 'number'}" sortable="'NumberOfDays'">
+                            {{product.NumberOfDays}}
+                        </td>
+                        <td title="'تعديل'">
+                            <a href="/Home/Edit?id={{product.ID}}"><i class="fa fa-2x fa-edit"></i></a>
+                        </td>
+                        <td title="'حذف'">
+                            <a href="/Home/Delete?id={{product.ID}}"><i class="fa fa-2x fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                    <tfoot>
+                        <tr>
+                            <th>اسم المنتج</th>
+                            <th>عدد الايام</th>
+                            <th>تعديل</th>
+                            <th>حذف</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    @* ====================================================================================================================== *@
+
+
+    <div>
+        <div>
+            
+        </div>
+    </div>
+    <script src="~/Scripts/App.js"></script>

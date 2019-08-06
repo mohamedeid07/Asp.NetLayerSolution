@@ -17,11 +17,10 @@ namespace ServiceLayer
         }
 
 
-        public void addProduct(int ID, string Name, int NumberOfDays)
+        public void addProduct( string Name, int NumberOfDays)
         {
 
             unitOfWork.Products.Add(new Product { 
-            ID = ID,
             Name = Name,
             NumberOfDays = NumberOfDays
             });

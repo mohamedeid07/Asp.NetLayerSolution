@@ -39,16 +39,21 @@ namespace AngularMVC.Controllers
             return View();
         }
         
+        //[HttpPost]
+        //public ActionResult Create(ProductModel product)
+        //{
+            
+        //        service.addProduct(product.ID,product.Name,product.NumberOfDays);
+        //        return RedirectToAction("Index");
+            
+        //    return View();
+        //}
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(ProductModel product)
         {
-            if (ModelState.IsValid)
-            {
-                service.addProduct(product.ID,product.Name,product.NumberOfDays);
-                return RedirectToAction("Index");
-            }
-            return View();
+
+            service.addProduct( product.Name, product.NumberOfDays);
+            return RedirectToAction("Index");
         }
 
         

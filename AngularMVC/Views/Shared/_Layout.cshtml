@@ -1,45 +1,130 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/flat-bootstrap-rtl.css" />
+    <link href="~/Assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/css/jPushMenu.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/css/data-tables.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/css/default.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Assets/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/jPushMenu.js"></script>
+    <script type="text/javascript" src="~/Assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/datatables-bootstrap.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>برنامج الإجتماعات</title>
     @Scripts.Render("~/bundles/angular")
-    
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right">
+        <h3>القائمة الرئيسية</h3>
+        <ul class="nav nav-pills nav-stacked">
+
+            <li>
+                <a href="index.html">
+                    <i class="fa fa-home"></i>
+                    الرئيسية
+                </a>
+            </li>
+            <li>
+                <a href="meeting-categories.html">
+                    <i class="fa fa-tags"></i>
+                    تصنيف الإجتماعات
+                </a>
+            </li>
+            <li>
+                <a href="index.html">
+                    <i class="fa fa-pencil-square-o"></i>
+                    إدارة الإجتماعات
+                </a>
+            </li>
+            <li>
+                <a href="add-meeting.html">
+                    <i class="fa fa-plus-square"></i>
+                    إضافة إجتماع
+                </a>
+            </li>
+            <li>
+                <a href="recommendation.html">
+                    <i class="fa fa-tasks"></i>
+                    التوصيات
+                </a>
+            </li>
+            <li>
+                <a href="recommendation-status.html">
+                    <i class="fa fa-check-square-o"></i>
+                    حالة التوصيات
+                </a>
+            </li>
+            <li>
+                <a href="stats.html">
+                    <i class="fa fa-bar-chart-o"></i>
+                    إحصائيات
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
+                <a href="index.html" class="navbar-brand"><img src="~/Assets/images/logo.png" width="195" height="50" /></a>
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>
+                        <a href="#" class="toggle-menu menu-right push-body">
+                            <i class="fa fa-bars fa-2x"></i>
+                            <span class="menu-lbl">القائمة</span>
+                        </a>
+                    </li>
+
                 </ul>
+
             </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="navbar-profile dropdown-toggle text-bold" data-toggle="dropdown"><img class="img-circle" src="~/Assets/images/default-avatar.jpg" alt="">مدير تجريبي <i class="fa fa-fw fa-angle-down"></i></a>
+                    <ul class="dropdown-menu animation-dock">
+                        <li class="dropdown-header">إعدادات</li>
+                        <li><a href="#">الحساب الشخصي</a></li>
+                        <li><a href="#">الصلاحيات</a></li>
+                        <li><a href="#">التنبيهات</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-fw fa-power-off"></i> الخروج من البرنامج</a></li>
+                    </ul><!--end .dropdown-menu -->
+                </li>
+            </ul>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
-        @RenderBody()
+        <div ng-app="myApp" ng-controller="MainCtrl">
+            @RenderBody()
+        </div>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-    
-   
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
+    <script>
+        jQuery(document).ready(function ($) {
+            $('.toggle-menu').jPushMenu();
+        });
+
+    </script>
+    @*<script>
+        $(document).ready(function () {
+            $('#meeting-cat').dataTable({
+                searching: false,
+                bLengthChange: false,
+                "aoColumnDefs": [
+                 { 'bSortable': false, 'aTargets': [-1, -2] }
+                ]
+            });
+        });</script>*@
 </body>
 </html>
