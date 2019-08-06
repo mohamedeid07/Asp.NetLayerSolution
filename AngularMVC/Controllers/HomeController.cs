@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 
 namespace AngularMVC.Controllers
 {
@@ -63,7 +64,20 @@ namespace AngularMVC.Controllers
             return RedirectToAction("Index");
         }
         
-        public ActionResult Edit(int id)
+        //public ActionResult Edit(int id)
+        //{
+        //    var product = service.getProduct(id);
+        //    ProductModel productModel = new ProductModel
+        //    {
+        //        ID = product.ID,
+        //        Name = product.Name,
+        //        NumberOfDays = (int)product.NumberOfDays
+        //    };
+
+        //    return View(productModel);
+        //}
+
+        public JsonResult Edit(int id)
         {
             var product = service.getProduct(id);
             ProductModel productModel = new ProductModel
@@ -73,7 +87,7 @@ namespace AngularMVC.Controllers
                 NumberOfDays = (int)product.NumberOfDays
             };
 
-            return View(productModel);
+            return Json(product, JsonRequestBehavior.AllowGet);
         }
         
         [HttpPost]

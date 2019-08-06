@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
 }
 
+@* Create Popup *@
 <div class="modal fade" id="add-cat">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -13,12 +14,54 @@
             </div>
             <div class="modal-body">
 
-                <form role="form" novalidate>
+                <form role="form" >
 
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label class="control-label col-md-2">الإسم</label>
-                            <div class="col-md-10" ng-class="{ 'has-error' : product.name.$invalid && !product.name.$pristine }">
+                            <div class="col-md-10" >
+                                <input type="text" ng-model="name" class="form-control" onkeyup="checkInputs()" required />
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label class="control-label col-md-2">عدد الايام</label>
+                            <div class="col-md-10">
+                                <input type="number" ng-model="number" class="form-control" required />
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">غلق</button>
+
+                <button type="button" ng-click="createProduct()" class="btn btn-primary">حفظ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Edit Popup *@
+<div class="modal fade" id="edit-cat">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">تعديل المنتج</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label class="control-label col-md-2">الإسم</label>
+                            <div class="col-md-10">
                                 <input type="text" ng-model="name" class="form-control" required />
                             </div>
                         </div>
@@ -28,7 +71,7 @@
                             <label class="control-label col-md-2">عدد الايام</label>
                             <div class="col-md-10">
                                 <input type="number" ng-model="number" class="form-control" required />
-                                
+
                             </div>
                         </div>
                     </div>
@@ -37,15 +80,16 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">غلق</button>
-                
-                <button type="button" ng-click="submitForm()" class="btn btn-primary">حفظ</button>
+
+                <button type="button" ng-click="submitEdit()" class="btn btn-primary">حفظ</button>
             </div>
         </div>
     </div>
 </div>
 
+@*ng-Table*@
 <div class="container">
-    <div class="row" >
+    <div class="row">
         <h2 class="text-center margin-btm20 solid-color">المنتجات</h2>
     </div>
 
@@ -63,11 +107,6 @@
 
                     </div>
 
-                    <div class="row text-center">
-                        <button class="btn btn-primary">بحث</button>
-                        <button class="btn btn-default">عرض الكل</button>
-                    </div>
-
                 </div>
             </div>
         </form>
@@ -81,9 +120,9 @@
             </a>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-top: 10px">
         <div class="col-md-12">
-            <div class="container">
+            <div class="table-responsive">
                 <table ng-table="myTable" class="table" show-filter="false">
 
                     <tr ng-repeat="product in $data | filter: searchfield">
@@ -94,10 +133,10 @@
                             {{product.NumberOfDays}}
                         </td>
                         <td title="'تعديل'">
-                            <a href="/Home/Edit?id={{product.ID}}"><i class="fa fa-2x fa-edit"></i></a>
+                            <a ng-click="editProduct(product.ID)" data-toggle="modal" data-target="#edit-cat"><i class="fa fa-2x fa-edit"></i></a>
                         </td>
                         <td title="'حذف'">
-                            <a href="/Home/Delete?id={{product.ID}}"><i class="fa fa-2x fa-trash-o"></i></a>
+                            <a ng-click="deleteProduct(product.ID)"><i class=" fa fa-2x fa-trash-o"></i></a>
                         </td>
                     </tr>
                     <tfoot>
@@ -113,13 +152,7 @@
         </div>
 
     </div>
-    </div>
-    @* ====================================================================================================================== *@
+</div>
 
 
-    <div>
-        <div>
-            
-        </div>
-    </div>
-    <script src="~/Scripts/App.js"></script>
+<script src="~/Scripts/App.js"></script>
