@@ -19,8 +19,10 @@
         };
         $scope.getTable();
         $scope.createProduct = function () {
+            
             // check to make sure the form is completely valid
-            if ($scope.name != undefined && $scope.number != undefined) {
+            if ($scope.createForm.name.$valid && $scope.createForm.number.$valid && $scope.createForm.number.$modelValue > 0) {
+                
                 $http({
                     method: "POST",
                     url: "/Home/Create",
@@ -30,10 +32,10 @@
                     }
                 }).then(
                     function successCallback(response) {
-                        console.log(response);
                         $scope.getTable();
                         $scope.myTable.reload();
                         $scope.name = $scope.number = undefined;
+                        $scope.createForm.name.$touched = $scope.createForm.number.$touched = false;
                     },
                     function errorCallback(response) {
                         console.log(response);
@@ -64,8 +66,8 @@
             }).then(
                 function successCallback(response) {
                     $scope.productID = id;
-                    $scope.name = response.data.Name;
-                    $scope.number = response.data.NumberOfDays;
+                    $scope.editName = response.data.Name;
+                    $scope.editNumber = response.data.NumberOfDays;
                 },
                 function errorCallback(response) {
                     console.log(response);
@@ -74,22 +76,25 @@
         };
 
         $scope.submitEdit = function (id) {
+            
+            console.log($scope.editForm.editNumber);
+            console.log($scope.createForm.editNumber);
             // check to make sure the form is completely valid
-            if ($scope.name != undefined && $scope.number != undefined) {
+            if ($scope.editForm.editName.$valid && $scope.editForm.editNumber.$valid && $scope.editForm.editNumber.$modelValue > 0) {
                 $http({
                     method: "POST",
                     url: "/Home/Edit",
                     data: {
                         ID: $scope.productID,
-                        Name: $scope.name,
-                        NumberOfDays: $scope.number
+                        Name: $scope.editName,
+                        NumberOfDays: $scope.editNumber
                     }
                 }).then(
                     function successCallback(response) {
-                        console.log(response);
                         $scope.getTable();
                         $scope.myTable.reload();
-                        $scope.name = $scope.number = undefined;
+                        $scope.editName = $scope.editNumber = undefined;
+                        $scope.editForm.editName.$touched = $scope.editForm.editNumber.$touched = false;
                     },
                     function errorCallback(response) {
                         console.log(response);
@@ -97,6 +102,14 @@
                 );
             }
         };
+
+        $scope.check = function () {
+            console.log($scope.editFrom.editNumber.$touched);
+            return false;
+            //return ($scope.editFrom.editName.$invalid || $scope.editFrom.editNumber.$invalid || $scope.editForm.editNumber.$modelValue < 0) && ($scope.editFrom.editNumber.$touched || $scope.editFrom.editName.$touched);
+        }
         
     });
 })();
+
+//(editFrom.editName.$invalid  || editFrom.editNumber.$invalid || editForm.editNumber.$modelValue < 0) && (editFrom.editNumber.$touched || editFrom.editName.$touched)

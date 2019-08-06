@@ -14,13 +14,13 @@
             </div>
             <div class="modal-body">
 
-                <form role="form" >
+                <form role="form" name="createForm" ng-model="createForm">
 
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label class="control-label col-md-2">الإسم</label>
                             <div class="col-md-10" >
-                                <input type="text" ng-model="name" class="form-control" onkeyup="checkInputs()" required />
+                                <input type="text" name="name" ng-model="name" class="form-control" ng-required="true" />
                                 
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                         <div class="col-md-12 form-group">
                             <label class="control-label col-md-2">عدد الايام</label>
                             <div class="col-md-10">
-                                <input type="number" ng-model="number" class="form-control" required />
+                                <input type="number" name="number" ng-model="number" class="form-control" ng-required="true" />
 
                             </div>
                         </div>
@@ -38,6 +38,11 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <div style="padding: 10px;">
+                    <div ng-show="(createForm.name.$invalid ||  createForm.number.$invalid || createForm.number.$modelValue < 0) && (createForm.name.$touched || createForm.number.$touched)"
+                         class="alert alert-danger"
+                         role="alert">Wrong</div>
+                </div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">غلق</button>
 
                 <button type="button" ng-click="createProduct()" class="btn btn-primary">حفظ</button>
@@ -56,13 +61,13 @@
             </div>
             <div class="modal-body">
 
-                <form role="form">
+                <form role="form" name="editForm" ng-model="editForm">
 
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label class="control-label col-md-2">الإسم</label>
                             <div class="col-md-10">
-                                <input type="text" ng-model="name" class="form-control" required />
+                                <input type="text" name="editName" ng-model="editName" class="form-control" ng-required="true" />
                             </div>
                         </div>
                     </div>
@@ -70,7 +75,7 @@
                         <div class="col-md-12 form-group">
                             <label class="control-label col-md-2">عدد الايام</label>
                             <div class="col-md-10">
-                                <input type="number" ng-model="number" class="form-control" required />
+                                <input type="number" name="editNumber" ng-model="editNumber" class="form-control" ng-required="true" />
 
                             </div>
                         </div>
@@ -79,9 +84,14 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <div style="padding: 10px;">
+                    <div ng-show="(editForm.editName.$invalid  || editForm.editNumber.$invalid || editForm.editNumber.$modelValue < 0) && (editForm.editNumber.$touched || editForm.editName.$touched)"
+                         class="alert alert-danger"
+                         role="alert">Wrong</div>
+                </div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">غلق</button>
 
-                <button type="button" ng-click="submitEdit()" class="btn btn-primary">حفظ</button>
+                <button type="button" ng-click="submitEdit()" class="btn btn-primary" data-dismiss="modal">حفظ</button>
             </div>
         </div>
     </div>
@@ -123,22 +133,24 @@
     <div class="row" style="margin-top: 10px">
         <div class="col-md-12">
             <div class="table-responsive">
-                <table ng-table="myTable" class="table" show-filter="false">
-
-                    <tr ng-repeat="product in $data | filter: searchfield">
-                        <td title="'اسم المنتج'" filter="{ Name: 'text'}" sortable="'Name'">
-                            {{product.Name}}
-                        </td>
-                        <td title="'عدد الايام'" filter="{ NumberOfDays: 'number'}" sortable="'NumberOfDays'">
-                            {{product.NumberOfDays}}
-                        </td>
-                        <td title="'تعديل'">
-                            <a ng-click="editProduct(product.ID)" data-toggle="modal" data-target="#edit-cat"><i class="fa fa-2x fa-edit"></i></a>
-                        </td>
-                        <td title="'حذف'">
-                            <a ng-click="deleteProduct(product.ID)"><i class=" fa fa-2x fa-trash-o"></i></a>
-                        </td>
-                    </tr>
+                <table ng-table="myTable" class="table table-striped table-bordered" show-filter="false">
+                    
+                        <tr ng-repeat="product in $data | filter: searchfield">
+                            <td title="'اسم المنتج'" filter="{ Name: 'text'}" sortable="'Name'">
+                                {{product.Name}}
+                            </td>
+                            <td title="'عدد الايام'" filter="{ NumberOfDays: 'number'}" sortable="'NumberOfDays'">
+                                {{product.NumberOfDays}}
+                            </td>
+                            <td title="'تعديل'">
+                                <a href="" ng-click="editProduct(product.ID)" data-toggle="modal" data-target="#edit-cat"><i class="fa fa-2x fa-edit"></i></a>
+                            </td>
+                            <td title="'حذف'">
+                                <a ng-click="deleteProduct(product.ID)"><i class=" fa fa-2x fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                    
+                    
                     <tfoot>
                         <tr>
                             <th>اسم المنتج</th>
