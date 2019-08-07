@@ -19,29 +19,12 @@ namespace AngularMVC.Controllers
 
         public JsonResult GetProducts()
         {
-            
             return Json(service.listProducts(), JsonRequestBehavior.AllowGet);
         }
-
-
-        public ActionResult Create()
-        {
-            return View();
-        }
         
-        //[HttpPost]
-        //public ActionResult Create(ProductModel product)
-        //{
-            
-        //        service.addProduct(product.ID,product.Name,product.NumberOfDays);
-        //        return RedirectToAction("Index");
-            
-        //    return View();
-        //}
         [HttpPost]
         public ActionResult Create(ProductModel product)
         {
-
             service.addProduct(product);
             return RedirectToAction("Index");
         }
@@ -52,19 +35,6 @@ namespace AngularMVC.Controllers
             service.removeProduct(id);
             return RedirectToAction("Index");
         }
-        
-        //public ActionResult Edit(int id)
-        //{
-        //    var product = service.getProduct(id);
-        //    ProductModel productModel = new ProductModel
-        //    {
-        //        ID = product.ID,
-        //        Name = product.Name,
-        //        NumberOfDays = (int)product.NumberOfDays
-        //    };
-
-        //    return View(productModel);
-        //}
 
         public JsonResult Edit(int id)
         {
@@ -79,7 +49,7 @@ namespace AngularMVC.Controllers
                 service.editProduct(product);
                 return RedirectToAction("Index");
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
     }

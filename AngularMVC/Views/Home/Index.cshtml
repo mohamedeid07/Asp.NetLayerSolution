@@ -19,9 +19,14 @@
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label class="control-label col-md-2">الإسم</label>
-                            <div class="col-md-10" >
-                                <input type="text" name="name" ng-model="name" class="form-control" ng-required="true" />
-                                
+                            <div class="col-md-10">
+                                <input type="text" name="name" ng-model="name" class="form-control " ng-required="true" />
+                                <div class="help-block">
+                                    <span ng-show="(createForm.name.$invalid) && (createForm.name.$touched)"
+                                          class="label label-danger">
+                                        يجب ادخال اسم المنتج
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -30,7 +35,16 @@
                             <label class="control-label col-md-2">عدد الايام</label>
                             <div class="col-md-10">
                                 <input type="number" name="number" ng-model="number" class="form-control" ng-required="true" />
-
+                                <div class="help-block">
+                                    <span ng-show="(createForm.number.$invalid) && (createForm.number.$touched)"
+                                          class="label label-danger">
+                                        يجب ادخال عدد ايام صحيح
+                                    </span>
+                                    <span ng-show="(createForm.number.$modelValue <= 0) && (createForm.number.$touched)"
+                                          class="label label-danger">
+                                        ارقام موجبة فقط
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -38,11 +52,6 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <div style="padding: 10px;">
-                    <div ng-show="(createForm.name.$invalid ||  createForm.number.$invalid || createForm.number.$modelValue < 0) && (createForm.name.$touched || createForm.number.$touched)"
-                         class="alert alert-danger"
-                         role="alert">Wrong</div>
-                </div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">غلق</button>
 
                 <button type="button" ng-click="createProduct()" class="btn btn-primary">حفظ</button>
@@ -68,6 +77,12 @@
                             <label class="control-label col-md-2">الإسم</label>
                             <div class="col-md-10">
                                 <input type="text" name="editName" ng-model="editName" class="form-control" ng-required="true" />
+                                <div class="help-block">
+                                    <span ng-show="(editForm.editName.$invalid) && (editForm.editName.$touched)"
+                                          class="label label-danger">
+                                        يجب ادخال اسم المنتج
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -76,7 +91,16 @@
                             <label class="control-label col-md-2">عدد الايام</label>
                             <div class="col-md-10">
                                 <input type="number" name="editNumber" ng-model="editNumber" class="form-control" ng-required="true" />
-
+                                <div class="help-block">
+                                    <span ng-show="(editForm.editNumber.$invalid) && (editForm.editNumber.$touched)"
+                                          class="label label-danger">
+                                        يجب ادخال عدد ايام صحيح
+                                    </span>
+                                    <span ng-show="(editForm.editNumber.$modelValue <= 0) && (editForm.editNumber.$touched)"
+                                          class="label label-danger">
+                                        ارقام موجبة فقط
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -84,13 +108,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <div style="padding: 10px;">
-                    <div ng-show="(editForm.editName.$invalid  || editForm.editNumber.$invalid || editForm.editNumber.$modelValue < 0) && (editForm.editNumber.$touched || editForm.editName.$touched)"
-                         class="alert alert-danger"
-                         role="alert">Wrong</div>
-                </div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">غلق</button>
-
                 <button type="button" ng-click="submitEdit()" class="btn btn-primary" data-dismiss="modal">حفظ</button>
             </div>
         </div>
