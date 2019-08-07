@@ -42,7 +42,7 @@ namespace AngularMVC.Controllers
         public ActionResult Create(ProductModel product)
         {
 
-            service.addProduct( product.Name, product.NumberOfDays);
+            service.addProduct(product);
             return RedirectToAction("Index");
         }
 
@@ -76,7 +76,7 @@ namespace AngularMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                service.editProduct(product.ID, product.Name, product.NumberOfDays);
+                service.editProduct(product);
                 return RedirectToAction("Index");
             }
             return View();

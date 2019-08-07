@@ -11,32 +11,31 @@ namespace ServiceLayer
 {
     public class Logic
     {
-        ProductsUnitOfWork unitOfWork = new ProductsUnitOfWork(new ProductsContext());
-
+        ProductsUnitOfWork unitOfWork;
+        public Logic(){
+            unitOfWork = new ProductsUnitOfWork(new ProductsContext());
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Product, ProductModel>();
+                cfg.CreateMap<ProductModel, Product>();
+            });
+        }
+        
         public List<ProductModel> listProducts(){
             List<ProductModel> products = new List<ProductModel>();
             foreach (var product in unitOfWork.Products.GetAll())
             {
-                ProductModel p = new ProductModel
-                {
-                    ID = product.ID,
-                    Name = product.Name,
-                    NumberOfDays = (int)product.NumberOfDays
-                };
+                ProductModel p = Mapper.Map<Product, ProductModel>(product);
                 products.Add(p);
             }
-                
                 return products;
         }
 
 
-        public void addProduct( string Name, int NumberOfDays)
+        public void addProduct( ProductModel productModel)
         {
 
-            unitOfWork.Products.Add(new Product { 
-            Name = Name,
-            NumberOfDays = NumberOfDays
-            });
+            unitOfWork.Products.Add(Mapper.Map<ProductModel, Product>(productModel));
             unitOfWork.complete();
         }
 
@@ -50,20 +49,15 @@ namespace ServiceLayer
         public ProductModel getProduct(int ID)
         {
             Product product = unitOfWork.Products.Get(ID);
-            ProductModel pm = new ProductModel
-            {
-                ID = product.ID,
-                Name = product.Name,
-                NumberOfDays = (int)product.NumberOfDays
-            };
+            ProductModel pm = Mapper.Map<Product, ProductModel>(product);
             return pm;
         }
 
-        public void editProduct(int ID, string newName, int newNumberOfDays)
+        public void editProduct(ProductModel productModel)
         {
-            Product product = unitOfWork.Products.Get(ID);
-            product.Name = newName;
-            product.NumberOfDays = newNumberOfDays;
+            Product product = unitOfWork.Products.Get(productModel.ID);
+            product.Name = productModel.Name;
+            product.NumberOfDays = productModel.NumberOfDays;
             unitOfWork.complete();
         }
     }
