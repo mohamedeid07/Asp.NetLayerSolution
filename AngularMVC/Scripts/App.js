@@ -2,15 +2,19 @@
     var myApp = angular.module("myApp", ["ngTable"]);
 
     myApp.controller("MainCtrl", function ($scope, $http, NgTableParams) {
-        var data = [];
+        $scope.data = [];
         $scope.getTable = function () {
             $http({
                 method: "GET",
                 url: "/Home/GetProducts"
             }).then(
                 function successCallback(response) {
-                    data = response.data;
-                    $scope.myTable = new NgTableParams({}, { dataset: data });
+                    $scope.data = response.data;
+                    $scope.myTable = new NgTableParams({
+                        filter: {
+                            term : ''
+                        }
+                    }, { dataset: $scope.data });
                 },
                 function errorCallback(response) {
                     console.log(response);
@@ -103,13 +107,11 @@
             }
         };
 
-        $scope.check = function () {
-            console.log($scope.editFrom.editNumber.$touched);
-            return false;
-            //return ($scope.editFrom.editName.$invalid || $scope.editFrom.editNumber.$invalid || $scope.editForm.editNumber.$modelValue < 0) && ($scope.editFrom.editNumber.$touched || $scope.editFrom.editName.$touched);
+        $scope.search = function () {
+            var term = $scope.searchfield;
+            $scope.myTable.filter({ $: term });
         }
+        
         
     });
 })();
-
-//(editFrom.editName.$invalid  || editFrom.editNumber.$invalid || editForm.editNumber.$modelValue < 0) && (editFrom.editNumber.$touched || editFrom.editName.$touched)
