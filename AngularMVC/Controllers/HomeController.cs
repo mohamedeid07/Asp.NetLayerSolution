@@ -1,11 +1,10 @@
-﻿using AngularMVC.Models;
-using ServiceLayer;
+﻿using ServiceLayer;
+using ViewModelLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
 
 namespace AngularMVC.Controllers
 {
@@ -20,18 +19,8 @@ namespace AngularMVC.Controllers
 
         public JsonResult GetProducts()
         {
-            List<ProductModel> products = new List<ProductModel>();
-            foreach (var product in service.listProducts())
-            {
-               ProductModel p =  new ProductModel
-            {
-                ID = product.ID,
-                Name = product.Name,
-                NumberOfDays = (int)product.NumberOfDays
-            };
-               products.Add(p);
-            }
-            return Json(products, JsonRequestBehavior.AllowGet);
+            
+            return Json(service.listProducts(), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -79,15 +68,7 @@ namespace AngularMVC.Controllers
 
         public JsonResult Edit(int id)
         {
-            var product = service.getProduct(id);
-            ProductModel productModel = new ProductModel
-            {
-                ID = product.ID,
-                Name = product.Name,
-                NumberOfDays = (int)product.NumberOfDays
-            };
-
-            return Json(product, JsonRequestBehavior.AllowGet);
+            return Json(service.getProduct(id), JsonRequestBehavior.AllowGet);
         }
         
         [HttpPost]

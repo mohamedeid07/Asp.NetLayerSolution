@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AngularMVC
+namespace ServiceLayer.Models
 {
     using System;
     using System.Collections.Generic;

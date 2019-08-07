@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using RepoLayer;
 using RepoLayer.Model;
+using ViewModelLayer.Models;
+using AutoMapper;
 
 namespace ServiceLayer
 {
@@ -11,8 +13,19 @@ namespace ServiceLayer
     {
         ProductsUnitOfWork unitOfWork = new ProductsUnitOfWork(new ProductsContext());
 
-        public IEnumerable<Product> listProducts(){
-                IEnumerable<Product> products = unitOfWork.Products.GetAll();
+        public List<ProductModel> listProducts(){
+            List<ProductModel> products = new List<ProductModel>();
+            foreach (var product in unitOfWork.Products.GetAll())
+            {
+                ProductModel p = new ProductModel
+                {
+                    ID = product.ID,
+                    Name = product.Name,
+                    NumberOfDays = (int)product.NumberOfDays
+                };
+                products.Add(p);
+            }
+                
                 return products;
         }
 
@@ -34,19 +47,24 @@ namespace ServiceLayer
             unitOfWork.complete();
         }
 
-        public Product getProduct(int ID)
+        public ProductModel getProduct(int ID)
         {
             Product product = unitOfWork.Products.Get(ID);
-            return product;
+            ProductModel pm = new ProductModel
+            {
+                ID = product.ID,
+                Name = product.Name,
+                NumberOfDays = (int)product.NumberOfDays
+            };
+            return pm;
         }
 
-        public Product editProduct(int ID, string newName, int newNumberOfDays)
+        public void editProduct(int ID, string newName, int newNumberOfDays)
         {
             Product product = unitOfWork.Products.Get(ID);
             product.Name = newName;
             product.NumberOfDays = newNumberOfDays;
             unitOfWork.complete();
-            return product;
         }
     }
 }
