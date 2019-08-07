@@ -41,9 +41,17 @@ namespace ServiceLayer
 
         public void removeProduct(int ID)
         {
-            Product product = unitOfWork.Products.Get(ID);
-            unitOfWork.Products.Remove(product);
-            unitOfWork.complete();
+            try
+            {
+                Product product = unitOfWork.Products.Get(ID);
+                unitOfWork.Products.Remove(product);
+                unitOfWork.complete();
+            }
+            catch (Exception)
+            {
+                //deleting an already deleted product
+                
+            }
         }
 
         public ProductModel getProduct(int ID)
@@ -55,10 +63,19 @@ namespace ServiceLayer
 
         public void editProduct(ProductModel productModel)
         {
-            Product product = unitOfWork.Products.Get(productModel.ID);
-            product.Name = productModel.Name;
-            product.NumberOfDays = productModel.NumberOfDays;
-            unitOfWork.complete();
+            try
+            {
+                Product product = unitOfWork.Products.Get(productModel.ID);
+                product.Name = productModel.Name;
+                product.NumberOfDays = productModel.NumberOfDays;
+                unitOfWork.complete();
+            }
+            catch (Exception)
+            {
+                //editing an already deleted product
+            }
+            
+            
         }
     }
 }
