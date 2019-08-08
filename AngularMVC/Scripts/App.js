@@ -3,6 +3,7 @@
 
     myApp.controller("MainCtrl", function ($scope, $http, NgTableParams) {
         $scope.page = 1;
+        $scope.count = 10;
         $scope.data = [];
         $scope.getTable = function () {
             $http({
@@ -13,6 +14,7 @@
                     $scope.data = response.data;
                     $scope.myTable = new NgTableParams({
                         page: $scope.page,
+                        count: $scope.count,
                         filter: {
                             term : ''
                         }
@@ -26,7 +28,8 @@
         $scope.getTable();
         $scope.createProduct = function () {
             $scope.page = $scope.myTable.page();
-            if ($scope.myTable.data.length == 10) {
+            $scope.count = $scope.myTable.count();
+            if ($scope.myTable.data.length == $scope.myTable.count()) {
                 $scope.page += 1;
             }
             // check to make sure the form is completely valid
@@ -55,7 +58,8 @@
 
         $scope.deleteProduct = function (id) {
             $scope.page = $scope.myTable.page();
-            if ($scope.myTable.data.length == 1) {
+            $scope.count = $scope.myTable.count();
+            if ($scope.myTable.data.length == 1 && $scope.page != 1) {
                 $scope.page -= 1;
             }
             $http({
@@ -65,7 +69,8 @@
                 function successCallback(response) {
                     $scope.getTable();
                     $scope.myTable.reload();
-                    $scope.search();
+                    
+                    //$scope.search();
                 },
                 function errorCallback(response) {
                     console.log(response);
@@ -81,7 +86,6 @@
                 url: "/Home/Edit?id=" + id
             }).then(
                 function successCallback(response) {
-                    console.log(response.data);
                     $scope.productID = id;
                     $scope.editName = response.data.Name;
                     $scope.editNumber = response.data.NumberOfDays;
@@ -111,7 +115,7 @@
                         $scope.myTable.reload();
                         $scope.editName = $scope.editNumber = undefined;
                         $scope.editForm.editName.$touched = $scope.editForm.editNumber.$touched = false;
-                        $scope.search();
+                        //$scope.search();
                     },
                     function errorCallback(response) {
                         console.log(response);
