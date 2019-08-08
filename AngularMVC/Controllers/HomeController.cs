@@ -52,29 +52,30 @@ namespace AngularMVC.Controllers
             }
             return RedirectToAction("Index");
         }
-        /*
+        
         public ActionResult Report()
         {
             LocalReport report = new LocalReport();
             report.ReportPath = Server.MapPath("~/Reports/ProductsReport.rdlc");
 
             ReportDataSource datasrc = new ReportDataSource();
-            datasrc.Name = "ProductsDataSource";
+            datasrc.Name = "ProductsDataSet";
             datasrc.Value = service.listProducts();
             report.DataSources.Add(datasrc);
+
             string reportType= "PDF";
             string mimeType;
             string encoding;
-            string fileNameExtension = ".pdf";
+            string fileNameExtension = "pdf";
 
             string[] streams;
             Warning[] warnings;
             byte[] renderedByte = report.Render(reportType,"",out mimeType, out encoding,
                 out fileNameExtension, out streams, out warnings);
 
-            Response.AddHeader("content:dispostion", "attatchment:filename= products_report.pdf");
-            return File(renderedByte,fileNameExtension);
+            Response.AddHeader("content-disposition", "attachment;filename= products_report.pdf");
+            return File(renderedByte, "pdf");
         }
-        */
+        
     }
 }
