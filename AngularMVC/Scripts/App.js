@@ -131,6 +131,9 @@
             $scope.myTable.filter({ $: term });
         }
         
+        $scope.makePDF = function () {
+                
+        }
         
     });
 })();

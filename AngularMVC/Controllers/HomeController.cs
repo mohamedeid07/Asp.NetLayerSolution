@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Reporting.WebForms;
 
 namespace AngularMVC.Controllers
 {
@@ -51,6 +52,29 @@ namespace AngularMVC.Controllers
             }
             return RedirectToAction("Index");
         }
+        /*
+        public ActionResult Report()
+        {
+            LocalReport report = new LocalReport();
+            report.ReportPath = Server.MapPath("~/Reports/ProductsReport.rdlc");
 
+            ReportDataSource datasrc = new ReportDataSource();
+            datasrc.Name = "ProductsDataSource";
+            datasrc.Value = service.listProducts();
+            report.DataSources.Add(datasrc);
+            string reportType= "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension = ".pdf";
+
+            string[] streams;
+            Warning[] warnings;
+            byte[] renderedByte = report.Render(reportType,"",out mimeType, out encoding,
+                out fileNameExtension, out streams, out warnings);
+
+            Response.AddHeader("content:dispostion", "attatchment:filename= products_report.pdf");
+            return File(renderedByte,fileNameExtension);
+        }
+        */
     }
 }

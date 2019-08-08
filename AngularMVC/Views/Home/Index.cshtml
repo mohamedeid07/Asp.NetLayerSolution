@@ -116,7 +116,7 @@
 </div>
 
 @*ng-Table*@
-<div class="container">
+<div class="container" id="content">
     <div class="row">
         <h2 class="text-center margin-btm20 solid-color">المنتجات</h2>
     </div>
@@ -184,6 +184,12 @@
             </div>
         </div>
 
+    </div>
+    <div class="row" style="margin-top: 10px">
+        <div class="col-md-2">
+            <button ng-click="makePDF()" class="btn btn-block">export pdf</button>
+            @Html.ActionLink("Export Pdf", "Report");
+        </div>
     </div>
 </div>
 

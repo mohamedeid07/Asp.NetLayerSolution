@@ -48,6 +48,7 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -146,8 +147,50 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Qvision_TasksDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Qvision_TasksDataSet1.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\bootstrap-theme.css" />
+    <Content Include="Assets\css\bootstrap.css" />
+    <Content Include="Assets\css\data-tables.css" />
+    <Content Include="Assets\css\data-tables.min.css" />
+    <Content Include="Assets\css\default.css" />
+    <Content Include="Assets\css\default.min.css" />
+    <Content Include="Assets\css\flat-bootstrap-ltr.css" />
+    <Content Include="Assets\css\flat-bootstrap-rtl.css" />
+    <Content Include="Assets\css\flat-bootstrap-rtl.min.css" />
+    <Content Include="Assets\css\font-awesome.min.css" />
+    <Content Include="Assets\css\fonts\footable.svg" />
+    <Content Include="Assets\css\jPushMenu.css" />
+    <Content Include="Assets\css\jPushMenu.min.css" />
+    <Content Include="Assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\images\default-avatar.jpg" />
+    <Content Include="Assets\images\login.png" />
+    <Content Include="Assets\images\logo.png" />
+    <Content Include="Assets\images\sort_asc.png" />
+    <Content Include="Assets\images\sort_asc_disabled.png" />
+    <Content Include="Assets\images\sort_both.png" />
+    <Content Include="Assets\images\sort_desc.png" />
+    <Content Include="Assets\images\sort_desc_disabled.png" />
+    <Content Include="Assets\js\bootstrap-ltr.js" />
+    <Content Include="Assets\js\bootstrap-ltr.min.js" />
+    <Content Include="Assets\js\bootstrap.js" />
+    <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\classie.js" />
+    <Content Include="Assets\js\datatables-bootstrap.js" />
+    <Content Include="Assets\js\datatables-bootstrap.min.js" />
+    <Content Include="Assets\js\html2canvas.min.js" />
+    <Content Include="Assets\js\jPushMenu.js" />
+    <Content Include="Assets\js\jquery-2.1.0.min.js" />
+    <Content Include="Assets\js\jquery.dataTables.min.js" />
+    <Content Include="Assets\js\jquery.mixitup.min.js" />
+    <Content Include="Assets\js\jspdf.min.js" />
+    <Content Include="Assets\js\tableHTMLExport.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ng-table.css" />
@@ -216,6 +259,28 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Assets\css\fonts\footable.eot" />
+    <Content Include="Assets\css\fonts\footable.ttf" />
+    <Content Include="Assets\css\fonts\footable.woff" />
+    <Content Include="Assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\fonts\FontAwesome.otf" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\js\dt_ar.lang" />
+    <Content Include="Qvision_TasksDataSet1.xsc">
+      <DependentUpon>Qvision_TasksDataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="Qvision_TasksDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Qvision_TasksDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Qvision_TasksDataSet1.xss">
+      <DependentUpon>Qvision_TasksDataSet1.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -1012,6 +1077,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\ProductsReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
